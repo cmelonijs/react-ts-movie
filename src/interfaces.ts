@@ -6,15 +6,15 @@ export interface CustomComponentProps {
 }
 
 export interface Season {
-  id: number
+  id: number;
 }
 
 export interface Film {
   id: number;
   title: string;
-  description: string
-  posterPath: string
-  coverPath: string
-  genreIds: number[]
-  seansons: Season[]
+  description: string;
+  posterPath: string;
+  coverPath: string;
+  genreIds: number[];
+  seansons: Season[];
 }
