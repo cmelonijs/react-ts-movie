@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Container from "../components/Container";
 import { mergeClassName } from "../utils";
 import {IoIosSearch} from 'react-icons/io'
@@ -17,11 +17,47 @@ const MENU_CLASS_ACTIVE = `
 
 const Header = () => {
   const location = useLocation();
-  const [pathname, setPathname] = useState<string>("");
+  const navigate = useNavigate();
 
+  const [pathname, setPathname] = useState<string>("");
+  const [keyword, setKeyword] = useState<any>("");
+  const [isSearchFocus, setSearchFocus] = useState<boolean>(false);
+
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  const [params, _] = useSearchParams();
+  
+  const pathnameRef = useRef('');
+
+  const goToSearchPage = () => {
+    if(keyword) {
+      navigate(`/search?q=${keyword}`)
+      setSearchFocus(false)
+      searchRef.current?.blur()
+    }
+  }
+
+  const initKeyword = () => {
+    if(pathnameRef.current === '/search') {
+      setKeyword(params.get('q'|| ''))
+    } else {
+      setKeyword('')
+    }
+  };
+
+  const onWindowClick = () => {
+    setSearchFocus(false);
+    initKeyword();
+  }
+ 
   useEffect(() => {
     setPathname(location.pathname);
+    pathnameRef.current = location.pathname;
   }, [location.pathname]);
+
+  useEffect(() => {
+    window.addEventListener('click', () => onWindowClick())
+  }, [])
 
   const getMenuClass = (path: string) => {
     return path === pathname
@@ -49,7 +85,18 @@ const Header = () => {
         </div>
         {/* search */}
         <div className="border-b-[1.5px] border-white flex items-center p-1 flex-[0.5] focus-within:border-primary">
-          <input type="text" className="bg-transparent outline-0 flex-1" placeholder="Cerca ..." />
+          <input 
+            onClick={e => {
+              e.stopPropagation();
+              setSearchFocus(true);
+            }} 
+            onKeyDown={e => e.key === "Enter" ? goToSearchPage() : ''} 
+            onInput={e => setKeyword(e.currentTarget.value)} 
+            value={keyword} 
+            type="text" 
+            className="bg-transparent outline-0 flex-1" 
+            placeholder="Cerca ..." 
+          />
           <IoIosSearch size={18} />
         </div>
       </Container>
