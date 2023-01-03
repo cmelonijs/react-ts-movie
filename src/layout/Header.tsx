@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from "react-router-do
 import Container from "../components/Container";
 import { mergeClassName } from "../utils";
 import {IoIosSearch} from 'react-icons/io'
+import SearchResult from "../components/SearchResult";
 
 const MENU_CLASS = `
     px-1.5
@@ -17,17 +18,18 @@ const MENU_CLASS_ACTIVE = `
 
 const Header = () => {
   const location = useLocation();
+
+  const [params, _] = useSearchParams();
+
   const navigate = useNavigate();
 
   const [pathname, setPathname] = useState<string>("");
+  const pathnameRef = useRef('');
+  const defaultKeyword = useRef('')
   const [keyword, setKeyword] = useState<any>("");
   const [isSearchFocus, setSearchFocus] = useState<boolean>(false);
 
   const searchRef = useRef<HTMLInputElement>(null);
-
-  const [params, _] = useSearchParams();
-  
-  const pathnameRef = useRef('');
 
   const goToSearchPage = () => {
     if(keyword) {
@@ -39,7 +41,7 @@ const Header = () => {
 
   const initKeyword = () => {
     if(pathnameRef.current === '/search') {
-      setKeyword(params.get('q'|| ''))
+      setKeyword(defaultKeyword.current)
     } else {
       setKeyword('')
     }
@@ -49,21 +51,27 @@ const Header = () => {
     setSearchFocus(false);
     initKeyword();
   }
- 
-  useEffect(() => {
-    setPathname(location.pathname);
-    pathnameRef.current = location.pathname;
-  }, [location.pathname]);
-
-  useEffect(() => {
-    window.addEventListener('click', () => onWindowClick())
-  }, [])
 
   const getMenuClass = (path: string) => {
     return path === pathname
       ? mergeClassName(MENU_CLASS, MENU_CLASS_ACTIVE)
       : mergeClassName(MENU_CLASS);
   };
+ 
+  useEffect(() => {
+    setPathname(location.pathname);
+    pathnameRef.current = location.pathname;
+    defaultKeyword.current = params.get('q') || '';
+    initKeyword();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    window.addEventListener('click', onWindowClick)
+
+    return () => {
+      window.removeEventListener('click', onWindowClick)
+    }
+  }, [])
 
   return (
     <div className="bg-header">
@@ -84,7 +92,7 @@ const Header = () => {
           </div>
         </div>
         {/* search */}
-        <div className="border-b-[1.5px] border-white flex items-center p-1 flex-[0.5] focus-within:border-primary">
+        <div className="relative border-b-[1.5px] border-white flex items-center p-1 flex-[0.5] focus-within:border-primary">
           <input 
             onClick={e => {
               e.stopPropagation();
@@ -98,7 +106,9 @@ const Header = () => {
             placeholder="Cerca ..." 
           />
           <IoIosSearch size={18} />
-        </div>
+          {/* search */}
+          {isSearchFocus && <SearchResult keyword={keyword} goToSearchPage={goToSearchPage} />}
+        </div> 
       </Container>
     </div>
   );
