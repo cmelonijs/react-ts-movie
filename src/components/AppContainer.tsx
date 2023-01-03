@@ -1,12 +1,15 @@
 import React from "react";
+import Header from "../layout/Header";
+import Body from "../layout/Body";
+import Footer from "../layout/Footer";
 
 const AppContainer = () => {
     return (
         <>
             <React.StrictMode>
-                <h3>header</h3>
-                <h1>app</h1>
-                <h3>footer</h3>
+                <Header />
+                <Body />
+                <Footer />
             </React.StrictMode>
         </>
     )
