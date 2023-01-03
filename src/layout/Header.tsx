@@ -14,39 +14,42 @@ const MENU_CLASS_ACTIVE = `
     bg-primary
 `;
 
-
 const Header = () => {
-    const location = useLocation();
-    const [pathname, setPathname] = useState<string>('');
+  const location = useLocation();
+  const [pathname, setPathname] = useState<string>("");
 
-    useEffect(() => {
-        setPathname(location.pathname)
-    }, [location.pathname]);
+  useEffect(() => {
+    setPathname(location.pathname);
+  }, [location.pathname]);
 
-    const getMenuClass = (path: string) => {
-        return path === pathname ? mergeClassName(MENU_CLASS, MENU_CLASS_ACTIVE) : mergeClassName(MENU_CLASS)
-    }
+  const getMenuClass = (path: string) => {
+    return path === pathname
+      ? mergeClassName(MENU_CLASS, MENU_CLASS_ACTIVE)
+      : mergeClassName(MENU_CLASS);
+  };
 
-    return (
-        <div className="bg-header">
-            <Container className="flex justify-between">
-                <div className="flex items-center gap-6">
-                    {/* brand */}
-                    <h1 className="text-2xl font-semibold">
-                        <Link to="/">
-                            Netflix
-                        </Link>
-                    </h1>
-                    {/* menu */}
-                    <div className="flex items-center gap-1.5">
-                        <Link className={getMenuClass('/movies')} to="/movies">Movies</Link>
-                        <Link className={getMenuClass('/tv')} to="/tv">TV</Link>
-                    </div>
-                </div>
-                {/* search */}
-            </Container>
+  return (
+    <div className="bg-header">
+      <Container className="flex justify-between">
+        <div className="flex items-center gap-6">
+          {/* brand */}
+          <h1 className="text-2xl font-semibold">
+            <Link to="/">Netflix</Link>
+          </h1>
+          {/* menu */}
+          <div className="flex items-center gap-1.5">
+            <Link className={getMenuClass("/movies")} to="/movies">
+              Movies
+            </Link>
+            <Link className={getMenuClass("/tv")} to="/tv">
+              TV
+            </Link>
+          </div>
         </div>
-    )
-}
+        {/* search */}
+      </Container>
+    </div>
+  );
+};
 
 export default Header;
