@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Container from "../components/Container";
 import { mergeClassName } from "../utils";
+import {IoIosSearch} from 'react-icons/io'
 
 const MENU_CLASS = `
     px-1.5
@@ -30,7 +31,7 @@ const Header = () => {
 
   return (
     <div className="bg-header">
-      <Container className="flex justify-between">
+      <Container className="flex items-center flex-1 justify-between">
         <div className="flex items-center gap-6">
           {/* brand */}
           <h1 className="text-2xl font-semibold">
@@ -47,6 +48,10 @@ const Header = () => {
           </div>
         </div>
         {/* search */}
+        <div className="border-b-[1.5px] border-white flex items-center p-1 flex-[0.5] focus-within:border-primary">
+          <input type="text" className="bg-transparent outline-0 flex-1" placeholder="Cerca ..." />
+          <IoIosSearch size={18} />
+        </div>
       </Container>
     </div>
   );
