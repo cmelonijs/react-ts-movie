@@ -40,6 +40,7 @@ const Header = () => {
 
   const goToSearchPage = () => {
     if (keyword) {
+      defaultKeyword.current = keyword
       navigate(`/search?q=${keyword}`);
       setSearchFocus(false);
       searchRef.current?.blur();

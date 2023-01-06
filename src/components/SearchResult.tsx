@@ -10,11 +10,12 @@ interface Props {
 
 const SearchResult = (props: Props) => {
   const [items, setItems] = useState<Film[]>([]);
+  const [totalItem, setTotalItem] = useState(6)
 
   const fetch = () => {
     const list: Film[] = [];
 
-    for (let i = 0; i <= 5; i++) {
+    for (let i = 0; i < 6; i++) {
       list.push({
         id: Math.random() * 100,
         title:
@@ -54,6 +55,7 @@ const SearchResult = (props: Props) => {
           </div>
         );
       })}
+      {totalItem > 5 && <button onClick={props.goToSearchPage()} className="px-3 py-1.5 bg-primary w-full hover:text-body">More result</button>}
     </div>
   );
 };
