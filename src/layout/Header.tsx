@@ -15,6 +15,7 @@ const MENU_CLASS = `
     py-1.5 
     hover:bg-primary
     rounded-md
+    mobile:px-6
 `;
 
 const MENU_CLASS_ACTIVE = `
@@ -90,7 +91,7 @@ const Header = () => {
             <Link to="/">Netflix</Link>
           </h1>
           {/* menu */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:justify-center mobile:py-3 mobile:bg-header mobile:gap-6 ">
             <Link className={getMenuClass("/movies")} to="/movies">
               Movies
             </Link>
