@@ -10,7 +10,7 @@ interface Props {
 
 const SearchResult = (props: Props) => {
   const [items, setItems] = useState<Film[]>([]);
-  const [totalItem, setTotalItem] = useState(6)
+  const [totalItem, setTotalItem] = useState(6);
 
   const fetch = () => {
     const list: Film[] = [];
@@ -55,7 +55,14 @@ const SearchResult = (props: Props) => {
           </div>
         );
       })}
-      {totalItem > 5 && <button onClick={props.goToSearchPage()} className="px-3 py-1.5 bg-primary w-full hover:text-body">More result</button>}
+      {totalItem > 5 && (
+        <button
+          onClick={props.goToSearchPage()}
+          className="px-3 py-1.5 bg-primary w-full hover:text-body"
+        >
+          More result
+        </button>
+      )}
     </div>
   );
 };

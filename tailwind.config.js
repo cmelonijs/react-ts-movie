@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: '#423F71',
-        header: '#292841',
-        body: '#1C1829'
+        primary: "#423F71",
+        header: "#292841",
+        body: "#1C1829",
       },
       screens: {
-        "mobile": {
-          max: "768px"
-        }
-      }
+        mobile: {
+          max: "768px",
+        },
+      },
     },
   },
-  plugins: ['@tailwindcss/line-clamp'],
-}
+  plugins: ["@tailwindcss/line-clamp"],
+};
