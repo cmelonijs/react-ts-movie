@@ -1,4 +1,4 @@
-import './Slider.css';
+import './slider.css';
 import Slick, { Settings } from 'react-slick';
 
 const Slider = (props: Settings) => {
