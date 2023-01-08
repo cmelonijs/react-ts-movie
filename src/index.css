@@ -26,3 +26,12 @@ body {
   background-color: theme("colors.body");
   color: theme("colors.white");
 }
+
+.overlay-slick-hero {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(45deg, theme('colors.body'), rgba(39, 39, 58, 0.336));
+}

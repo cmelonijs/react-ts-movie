@@ -34,7 +34,7 @@ const Home = () => {
   return (
   <>
     <Section className="py-0">
-      <Slider autoplay={true} slidesToShow={1} slidesToScroll={1}>
+      <Slider className="slick-hero " autoplay={true} slidesToShow={1} slidesToScroll={1}>
         {trendings.map((film) => (
           <TrendingHero key={film.id} film={film} />
         ))}
