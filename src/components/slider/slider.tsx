@@ -1,10 +1,12 @@
-import './slider.css';
-import Slick, { Settings } from 'react-slick';
+import "./slider.css";
+import Slick, { Settings } from "react-slick";
 
 const Slider = (props: Settings) => {
-    return (
-        <Slick {...props} autoplaySpeed={5000}>{props.children}</Slick>
-    )
-}
+  return (
+    <Slick {...props} autoplaySpeed={5000}>
+      {props.children}
+    </Slick>
+  );
+};
 
 export default Slider;

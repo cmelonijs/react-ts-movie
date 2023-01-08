@@ -16,7 +16,8 @@ const Home = () => {
         id: Math.random() * 100,
         title:
           "Mamma ho perso l'aereoMamma ho perso l'aereoMamma ho perso l'aereoMamma ho perso l'aereo",
-        description: "Mamma ho perso l'aereoMamma ho perso l'aereoMamma ho perso l'aereoMamma ho perso l'aereo",
+        description:
+          "Mamma ho perso l'aereoMamma ho perso l'aereoMamma ho perso l'aereoMamma ho perso l'aereo",
         coverPath: "",
         genreIds: [1, 2, 3, 4, 5],
         posterPath: "",
@@ -30,17 +31,22 @@ const Home = () => {
   useEffect(() => {
     fetchTrendings();
   }, []);
-  
+
   return (
-  <>
-    <Section className="py-0">
-      <Slider className="slick-hero " autoplay={true} slidesToShow={1} slidesToScroll={1}>
-        {trendings.map((film) => (
-          <TrendingHero key={film.id} film={film} />
-        ))}
-      </Slider>
-    </Section>
-  </>
+    <>
+      <Section className="py-0">
+        <Slider
+          className="slick-hero "
+          autoplay={true}
+          slidesToShow={1}
+          slidesToScroll={1}
+        >
+          {trendings.map((film) => (
+            <TrendingHero key={film.id} film={film} />
+          ))}
+        </Slider>
+      </Section>
+    </>
   );
 };
 
