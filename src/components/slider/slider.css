@@ -1,6 +1,10 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+.slick-prev {
+  
+}
+
 .slick-hero .slick-prev {
   left: 25px;
   z-index: 10;

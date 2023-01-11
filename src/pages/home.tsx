@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Section from "../components/Section";
+import Card from "../components/Card";
 import Slider from "../components/slider/slider";
 import TrendingHero from "../components/trending-hero";
 import { Film } from "../interfaces";
 
 const Home = () => {
   const [trendings, setTrendings] = useState<Film[]>([]);
+  const [inTeather, setInTeather] = useState<Film[]>([]); 
 
   const fetchTrendings = () => {
     const list: Film[] = [];
@@ -26,6 +28,7 @@ const Home = () => {
     }
 
     setTrendings(list);
+    setInTeather(list);
   };
 
   useEffect(() => {
@@ -43,6 +46,17 @@ const Home = () => {
         >
           {trendings.map((film) => (
             <TrendingHero key={film.id} film={film} />
+          ))}
+        </Slider>
+      </Section>
+      <Section title="In teathre">
+      <Slider
+          autoplay={true}
+          slidesToShow={5}
+          slidesToScroll={5}
+        >
+          {inTeather.map((film) => (
+            <Card key={film.id} film={film} />
           ))}
         </Slider>
       </Section>
